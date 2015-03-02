@@ -2,16 +2,14 @@
 
 namespace app\modules\main\controllers;
 
+use Yii; 
 use app\modules\main\models\Categories;
 use app\modules\main\models\Organization;
-use yii\base\InvalidParamException;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\web\BadRequestHttpException;
+use app\modules\main\models;
 use yii\web\Controller;
-use yii\helpers\Html as Html;
-use Yii; 
- 
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+
 class DefaultController extends Controller
 {
     public function actions()
@@ -40,7 +38,10 @@ class DefaultController extends Controller
     }
     public function actionView($id)
     {
-		$organization = Organization::find()->where("id = :id", [':id' => $id])->one();
+		//$organization = Organization::find()->where("id = :id", [':id' => $id])->one();
+        $organization = Organization::findOne($id);
+		if ($organization === null)
+            throw new NotFoundHttpException('The requested page does not exist.');
 		return $this->render('view', [
             'organization' => $organization,
         ]);

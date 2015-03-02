@@ -62,7 +62,19 @@ AppAsset::register($this);
 				//alert Flash-messages
 				echo Alert::widget();
 			?>
-            <?= $content ?>
+			
+			
+			<div class="main-default-index">
+
+				<div class="jumbotron">
+					<p><a class="btn btn-lg btn-success" href="/">Start</a></p>
+				</div>
+			
+			
+				<?= $content ?>
+				
+				
+			</div>
         </div>
     </div>
 
